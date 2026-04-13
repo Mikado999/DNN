@@ -1,5 +1,7 @@
 {
-  "name": "Product Name",
-  "description": "Product Description",
-  "image": "assets/product-image.jpg"
+  "name": "Cool Shirt",
+  "description": "100% Cotton, comfortable and stylish",
+  "image": "assets/shirt.jpg",
+  "price": 19.99,
+  "category": "Clothing"
 }
