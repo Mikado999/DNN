@@ -1,0 +1,34 @@
+<div id="product-container"></div>
+
+<script>
+  const owner = 'YOUR_USERNAME';
+  const repo = 'YOUR_REPO_NAME';
+  const path = 'products'; // The folder where you'll add JSON files
+
+  async function loadProducts() {
+    // 1. Get the list of all files in the 'products' folder
+    const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`);
+    const files = await response.json();
+
+    const container = document.getElementById('product-container');
+
+    for (const file of files) {
+      if (file.name.endsWith('.json')) {
+        // 2. Fetch the actual content of each JSON file
+        const productRes = await fetch(file.download_url);
+        const product = await productRes.json();
+
+        // 3. Render the product using your template
+        container.innerHTML += `
+          <div class="product-card">
+            <img src="${product.image}" alt="${product.name}">
+            <h2>${product.name}</h2>
+            <p>${product.description}</p>
+          </div>
+        `;
+      }
+    }
+  }
+
+  loadProducts();
+</script>
